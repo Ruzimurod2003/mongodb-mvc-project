@@ -1,0 +1,28 @@
+﻿@model MongoApp.Models.Product
+
+@{
+    ViewData["Title"] = "Прикрепить изображение";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <div>@Model.Name</div>
+        </div>
+        <div class="form-group">
+            <label>Загрузить изображение</label>
+            <input type="file" name="uploadedFile" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+
+@if (Model.HasImage())
+{
+    <img src="@Url.Action("GetImage", new { id=@Model.ImageId})" style="width:150px;height:200px;" />
+}
